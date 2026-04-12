@@ -35,7 +35,6 @@ resource "aws_route_table" "public_route_table" {
     gateway_id = aws_internet_gateway.internet_gateway_main.id
   }
 
-
   tags = {
     project     = "python-aws"
     environment = "dev"
