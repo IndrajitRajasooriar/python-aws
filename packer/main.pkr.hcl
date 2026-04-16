@@ -28,6 +28,6 @@ build {
   sources = ["source.amazon-ebs.rhel"]
 
   provisioner "shell" {
-    script = "../script.sh"
+    script = "../packer-script.sh"
   }
 }
