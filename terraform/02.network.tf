@@ -1,30 +1,20 @@
 resource "aws_vpc" "main_vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr_block
 
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-
-  }
+  tags = var.tags
 }
 
 resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.main_vpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = var.subnet_cidr_block
 
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-  }
+  tags = var.tags
 }
 
 resource "aws_internet_gateway" "internet_gateway_main" {
   vpc_id = aws_vpc.main_vpc.id
 
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-  }
+  tags = var.tags
 }
 
 resource "aws_route_table" "public_route_table" {
@@ -34,11 +24,7 @@ resource "aws_route_table" "public_route_table" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.internet_gateway_main.id
   }
-
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-  }
+  tags = var.tags
 }
 
 resource "aws_route_table_association" "route_table_association_main" {

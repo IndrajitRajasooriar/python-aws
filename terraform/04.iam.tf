@@ -17,10 +17,7 @@ resource "aws_iam_role" "role_for_ec2" {
     ]
   })
 
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-  }
+  tags = var.tags
 }
 
 # Attach AmazonSSMManagedInstanceCore policy to the IAM role
