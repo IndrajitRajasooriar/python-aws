@@ -7,8 +7,10 @@ resource "aws_instance" "main_instance" {
   user_data                   = file("../script-start.sh")
   iam_instance_profile        = aws_iam_instance_profile.ec2_instance_profile.name
 
-  tags = {
-    project     = "python-aws"
-    environment = "dev"
-  }
+  tags = merge(
+    var.tags, 
+    { 
+      Name = "${local.name_prefix}-ec2"
+    }
+  )
 }
